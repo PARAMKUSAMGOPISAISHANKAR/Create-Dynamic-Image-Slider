@@ -1,0 +1,154 @@
+/* ==========================================================================
+   DYNAMIC IMAGE SLIDER PRO - Cinematic Animations & Keyframes
+   ========================================================================== */
+
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(24px, -20px, 0) scale(1.06);
+  }
+}
+
+@keyframes cardContentIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.38);
+  }
+  70% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translate3d(20px, 0, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.ambient-orb--1 {
+  animation: orbFloat 16s ease-in-out infinite;
+}
+
+.ambient-orb--2 {
+  animation: orbFloat 20s ease-in-out infinite reverse;
+}
+
+.ambient-orb--3 {
+  animation: orbFloat 24s ease-in-out infinite;
+}
+
+/* Active Slide Staggered Entrance */
+.swiper-slide-active .card-badge,
+.swiper-slide-active .name,
+.swiper-slide-active .description,
+.swiper-slide-active .card-tags,
+.swiper-slide-active .card-actions {
+  animation: cardContentIn 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.swiper-slide-active .card-badge { animation-delay: 0.04s; }
+.swiper-slide-active .name { animation-delay: 0.10s; }
+.swiper-slide-active .description { animation-delay: 0.16s; }
+.swiper-slide-active .card-tags { animation-delay: 0.21s; }
+.swiper-slide-active .card-actions { animation-delay: 0.26s; }
+
+/* Heart animation */
+.fav-btn.is-popping svg {
+  animation: heartPop 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Modal animations */
+.modal-backdrop.is-open {
+  animation: modalFadeIn 0.25s ease forwards;
+}
+
+.modal-backdrop.is-open .modal-dialog {
+  animation: modalScaleIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Toast animations */
+.toast-item {
+  animation: toastSlideIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Image Loading Skeleton */
+.card-image.is-loading {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-orb {
+    animation: none !important;
+  }
+}
+
+body.effects-reduced *,
+body.effects-reduced *::before,
+body.effects-reduced *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.12s !important;
+}

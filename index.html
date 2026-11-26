@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Image Slider Pro — Advanced 3D Experience</title>
+  <!-- Swiper 11 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/glassmorphism.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <!-- Ambient Background Lighting -->
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-orb ambient-orb--1"></div>
+    <div class="ambient-orb ambient-orb--2"></div>
+    <div class="ambient-orb ambient-orb--3"></div>
+  </div>
+
+  <main id="top" class="app-main">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-pill glass-panel">iOS 3D Glassmorphism &bull; Swiper 11 Engine</div>
+      <h1 class="hero-title">Explore the Visual Experience</h1>
+      <p class="hero-subtitle">Discover, explore, and interact with beautifully designed cards.</p>
+
+      <div class="quick-stats-grid">
+        <div class="stat-chip glass-panel">
+          <span class="stat-label">Total Cards</span>
+          <strong class="stat-value" id="statTotalCards">09</strong>
+        </div>
+        <div class="stat-chip glass-panel">
+          <span class="stat-label">Favorites</span>
+          <strong class="stat-value" id="statFavoritesCount">0</strong>
+        </div>
+        <div class="stat-chip glass-panel">
+          <span class="stat-label">Visible</span>
+          <strong class="stat-value" id="matchingCountBadge">9 cards shown</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Category Filters -->
+    <section class="filter-section" aria-label="Search and filter cards">
+      <div class="search-filter-bar glass-panel">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+          <input type="search" id="searchInput" placeholder="Search by title, description, category, or tag..." aria-label="Search cards">
+        </div>
+
+        <div class="filter-actions">
+          <button type="button" class="pill-btn glass-panel" id="favoritesFilterBtn" aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>Favorites Only</span>
+          </button>
+          <button type="button" class="pill-btn glass-panel" data-clear-filters>Clear Filters</button>
+          <button type="button" class="pill-btn glass-panel" data-open-settings>Settings</button>
+          <label class="theme-switcher-wrap glass-panel" for="themeSelect">
+            <span class="theme-label">Theme</span>
+            <select id="themeSelect" aria-label="Select visual theme">
+              <option value="midnight">Midnight Glass</option>
+              <option value="purple">Purple Galaxy</option>
+              <option value="ocean">Ocean Blue</option>
+              <option value="light">Minimal Light</option>
+            </select>
+          </label>
+          <button type="button" class="pill-btn pill-btn--accent" data-open-add-card>+ Add Card</button>
+        </div>
+      </div>
+
+      <div class="category-pills-row" id="categoryFilterPills" role="tablist" aria-label="Category filters"></div>
+    </section>
+
+    <!-- Main 3D Slider Section -->
+    <section class="slider-section" id="sliderSection" aria-label="Interactive 3D Card Slider">
+      <!-- Advanced Control Panel -->
+      <div class="controls-toolbar glass-panel">
+        <div class="controls-group">
+          <button type="button" class="ctrl-btn" id="toggleAutoplayBtn" aria-pressed="true" title="Play or Pause Autoplay (Space)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+              <path d="M6 4h4v16H6zM14 4h4v16h-4z"></path>
+            </svg>
+            <span id="toggleAutoplayLabel">Pause</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="restartSliderBtn" title="Restart Slider">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path>
+              <path d="M3 3v5h5"></path>
+            </svg>
+            <span>Restart</span>
+          </button>
+          <button type="button" class="ctrl-btn" id="fullscreenBtn" title="Toggle Fullscreen">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+            <span>Fullscreen</span>
+          </button>
+        </div>
+
+        <div class="controls-group">
+          <label class="ctrl-select-wrap">
+            <span>Effect</span>
+            <select id="effectSelect" aria-label="Transition effect">
+              <option value="coverflow">3D Coverflow</option>
+              <option value="creative">Creative 3D</option>
+              <option value="depth">Depth Perspective</option>
+              <option value="zoom-rotate">Zoom &amp; Tilt 3D</option>
+              <option value="cards">3D Card Stack</option>
+              <option value="flip">3D Flip</option>
+              <option value="cube">3D Cube</option>
+              <option value="fade">Fade</option>
+              <option value="slide">Smooth Slide</option>
+            </select>
+          </label>
+
+          <label class="ctrl-select-wrap">
+            <span>Speed</span>
+            <select id="speedSelect" aria-label="Autoplay speed">
+              <option value="slow">Slow (3.5s)</option>
+              <option value="normal">Normal (2s)</option>
+              <option value="fast">Fast (1.2s)</option>
+            </select>
+          </label>
+
+          <label class="ctrl-toggle" title="Toggle 3D pointer tilt">
+            <input type="checkbox" id="tiltToggle" checked>
+            <span>3D Tilt</span>
+          </label>
+
+          <label class="ctrl-toggle" title="Toggle glass & motion effects">
+            <input type="checkbox" id="effectsToggle" checked>
+            <span>Effects</span>
+          </label>
+        </div>
+
+        <div class="slide-counter-pill" id="slideCounter" aria-live="polite">01 / 09</div>
+      </div>
+
+      <!-- Autoplay Progress Bar -->
+      <div class="autoplay-progress-track" aria-hidden="true">
+        <div class="autoplay-progress-fill" id="autoplayProgressBar"></div>
+      </div>
+
+      <!-- Preserved Swiper 11 Container -->
+      <div class="slider-shell" id="sliderShell">
+        <div class="slide-container swiper">
+          <div class="slide-content">
+            <div class="card-wrapper swiper-wrapper" id="cardWrapper">
+              <!-- Initial fallback slides rendered dynamically by card-manager.js -->
+            </div>
+          </div>
+          <button type="button" class="swiper-button-next swiper-navBtn" aria-label="Next slide"></button>
+          <button type="button" class="swiper-button-prev swiper-navBtn" aria-label="Previous slide"></button>
+          <div class="swiper-pagination"></div>
+        </div>
+
+        <!-- Slide Thumbnails -->
+        <div class="thumbnail-bar glass-panel" id="thumbnailBar" aria-label="Slide thumbnails"></div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state glass-panel" id="emptyState" hidden>
+        <div class="empty-icon" aria-hidden="true">&#128269;</div>
+        <h3>No matching cards found</h3>
+        <p>Try adjusting your search query, category filter, or favorites toggle.</p>
+        <button type="button" class="button button-primary" data-clear-filters>Reset All Filters</button>
+      </div>
+    </section>
+
+    <!-- Featured & Recently Viewed Section -->
+    <section class="highlights-section">
+      <div class="highlights-col">
+        <div class="section-heading">
+          <h2>Featured Cards</h2>
+          <span>Curated highlights</span>
+        </div>
+        <div class="mini-cards-grid" id="featuredCardsGrid"></div>
+      </div>
+
+      <div class="highlights-col">
+        <div class="section-heading">
+          <h2>Recently Viewed</h2>
+          <span>Your latest previews</span>
+        </div>
+        <div class="mini-cards-grid" id="recentCardsGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer glass-panel">
+    <div class="footer-inner">
+      <div>
+        <strong>Dynamic Image Slider Pro</strong>
+        <p>3D iOS Glassmorphism Showcase &bull; Powered by Swiper 11, HTML5, CSS3 &amp; Vanilla JavaScript</p>
+      </div>
+      <div class="footer-shortcuts">
+        <span>Shortcuts: <kbd>&larr;</kbd> <kbd>&rarr;</kbd> Navigate &bull; <kbd>Space</kbd> Play/Pause &bull; <kbd>Esc</kbd> Close</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Card Details Modal -->
+  <div class="modal-backdrop" id="detailsModal" hidden role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+    <div class="modal-dialog modal-dialog--lg glass-panel-strong">
+      <button type="button" class="modal-close-btn" data-close-modal="detailsModal" aria-label="Close details">&times;</button>
+      <div class="details-grid">
+        <div class="details-media" id="detailsImageWrap" title="Click to open lightbox">
+          <img id="detailsImage" src="" alt="">
+          <span class="zoom-hint">Click to enlarge</span>
+        </div>
+        <div class="details-body">
+          <div class="details-top-meta">
+            <span class="card-badge" id="detailsCategory">Category</span>
+            <span class="details-meta-text" id="detailsMeta"></span>
+          </div>
+          <h2 id="detailsTitle">Card Title</h2>
+          <p class="details-description" id="detailsDescription"></p>
+          <div class="details-tags" id="detailsTags"></div>
+
+          <div class="details-actions-row">
+            <button type="button" class="pill-btn glass-panel" id="detailsFavBtn" aria-pressed="false">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+              <span id="detailsFavLabel">Add to Favorites</span>
+            </button>
+            <button type="button" class="pill-btn glass-panel" id="detailsShareBtn">Share Card</button>
+            <button type="button" class="pill-btn glass-panel" id="detailsEditBtn">Edit</button>
+            <button type="button" class="pill-btn pill-btn--danger" id="detailsDeleteBtn">Delete</button>
+          </div>
+
+          <div class="details-nav-row">
+            <button type="button" class="ctrl-btn" id="detailsPrevBtn">&larr; Previous Card</button>
+            <button type="button" class="ctrl-btn" id="detailsNextBtn">Next Card &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Card Modal -->
+  <div class="modal-backdrop" id="cardFormModal" hidden role="dialog" aria-modal="true" aria-labelledby="cardFormTitle">
+    <div class="modal-dialog glass-panel-strong">
+      <button type="button" class="modal-close-btn" data-close-modal="cardFormModal" aria-label="Close form">&times;</button>
+      <h2 class="modal-heading" id="cardFormTitle">Add New Card</h2>
+      <form id="cardForm" novalidate>
+        <div class="form-error" id="cardFormError" hidden></div>
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="cardTitleInput">Card Title *</label>
+            <input type="text" id="cardTitleInput" required maxlength="80" placeholder="e.g. Modern Web Architecture">
+          </div>
+
+          <div class="form-field">
+            <label for="cardCategoryInput">Category *</label>
+            <select id="cardCategoryInput" required></select>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="cardImageInput">Image URL *</label>
+          <input type="url" id="cardImageInput" required placeholder="https://example.com/image.jpg">
+        </div>
+
+        <div class="form-field">
+          <label for="cardDescInput">Description *</label>
+          <textarea id="cardDescInput" rows="3" required maxlength="400" placeholder="Enter a concise description..."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="cardTagsInput">Tags (comma separated)</label>
+          <input type="text" id="cardTagsInput" placeholder="Frontend, UI/UX, Glassmorphism">
+        </div>
+
+        <div class="form-preview glass-panel" id="cardFormPreview" hidden>
+          <img id="previewCardImg" src="" alt="Preview">
+          <div>
+            <span class="card-badge" id="previewCardCat">Category</span>
+            <h4 id="previewCardTitle">Title</h4>
+            <p id="previewCardDesc">Description</p>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="pill-btn glass-panel" data-close-modal="cardFormModal">Cancel</button>
+          <button type="button" class="pill-btn glass-panel" id="cardFormPreviewBtn">Preview Card</button>
+          <button type="submit" class="button button-primary" id="cardFormSubmitBtn">Add Card</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-backdrop" id="settingsModal" hidden role="dialog" aria-modal="true" aria-labelledby="settingsHeading">
+    <div class="modal-dialog glass-panel-strong">
+      <button type="button" class="modal-close-btn" data-close-modal="settingsModal" aria-label="Close settings">&times;</button>
+      <h2 class="modal-heading" id="settingsHeading">Slider &amp; Appearance Settings</h2>
+
+      <div class="settings-list">
+        <div class="setting-row">
+          <div>
+            <strong>Transition Effect</strong>
+            <small>Choose the 3D or 2D Swiper slide animation</small>
+          </div>
+          <select id="settingsEffectSelect" aria-label="Settings transition effect">
+            <option value="coverflow">3D Coverflow</option>
+            <option value="creative">Creative 3D</option>
+            <option value="depth">Depth Perspective</option>
+            <option value="zoom-rotate">Zoom &amp; Tilt 3D</option>
+            <option value="cards">3D Card Stack</option>
+            <option value="flip">3D Flip</option>
+            <option value="cube">3D Cube</option>
+            <option value="fade">Fade</option>
+            <option value="slide">Smooth Slide</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Autoplay Speed</strong>
+            <small>Control automatic slide interval</small>
+          </div>
+          <select id="settingsSpeedSelect" aria-label="Settings autoplay speed">
+            <option value="slow">Slow (3.5s)</option>
+            <option value="normal">Normal (2.0s)</option>
+            <option value="fast">Fast (1.2s)</option>
+          </select>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Pause on Hover</strong>
+            <small>Pause autoplay when pointer hovers the slider</small>
+          </div>
+          <input type="checkbox" id="pauseHoverToggle" checked>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>3D Card Tilt</strong>
+            <small>Subtle perspective tilt on pointer movement</small>
+          </div>
+          <input type="checkbox" id="settingsTiltToggle" checked>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <strong>Glass &amp; Motion Effects</strong>
+            <small>Disable for maximum performance or reduced motion</small>
+          </div>
+          <input type="checkbox" id="settingsEffectsToggle" checked>
+        </div>
+
+        <div class="setting-row setting-row--col">
+          <strong>Theme Customization</strong>
+          <div class="theme-pills-grid">
+            <button type="button" class="theme-option-btn" data-theme-option="midnight">Midnight Glass</button>
+            <button type="button" class="theme-option-btn" data-theme-option="purple">Purple Galaxy</button>
+            <button type="button" class="theme-option-btn" data-theme-option="ocean">Ocean Blue</button>
+            <button type="button" class="theme-option-btn" data-theme-option="light">Minimal Light</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal-backdrop" id="confirmModal" hidden role="dialog" aria-modal="true" aria-labelledby="confirmHeading">
+    <div class="modal-dialog modal-dialog--sm glass-panel-strong">
+      <h2 class="modal-heading" id="confirmHeading">Confirm Deletion</h2>
+      <p id="confirmMessage" class="confirm-text">Are you sure you want to delete this card?</p>
+      <div class="form-actions">
+        <button type="button" class="pill-btn glass-panel" data-close-modal="confirmModal">Cancel</button>
+        <button type="button" class="pill-btn pill-btn--danger" id="confirmDeleteBtn">Delete Card</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div class="modal-backdrop modal-backdrop--dark" id="lightboxModal" hidden role="dialog" aria-modal="true" aria-label="Image Lightbox">
+    <button type="button" class="lightbox-close-btn" data-close-modal="lightboxModal" aria-label="Close lightbox">&times;</button>
+    <figure class="lightbox-figure">
+      <img id="lightboxImage" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Swiper 11 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- App Modules -->
+  <script src="js/storage.js"></script>
+  <script src="js/card-data.js"></script>
+  <script src="js/themes.js"></script>
+  <script src="js/favorites.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/card-manager.js"></script>
+  <script src="js/slider-controls.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

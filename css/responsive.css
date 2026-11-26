@@ -1,0 +1,141 @@
+/* ==========================================================================
+   DYNAMIC IMAGE SLIDER PRO - Responsive Breakpoints
+   ========================================================================== */
+
+@media (max-width: 1120px) {
+  .app-header-inner {
+    padding: 12px 20px;
+  }
+
+  .slide-container {
+    padding: 20px 16px 36px;
+  }
+
+  .slide-content {
+    margin: 0 28px;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-media {
+    min-height: 260px;
+    max-height: 340px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: inline-flex;
+  }
+
+  .nav-links.is-mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 16px;
+    right: 16px;
+    padding: 14px;
+    border-radius: 20px;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid var(--glass-border-strong);
+    box-shadow: var(--card-shadow);
+    z-index: 60;
+    gap: 6px;
+  }
+
+  .controls-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls-group {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .search-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input-wrap {
+    min-width: 100%;
+  }
+
+  .quick-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding: 24px 16px 12px;
+  }
+
+  .hero-title {
+    font-size: 1.85rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .slide-content {
+    margin: 0 8px;
+    padding: 24px 4px 44px;
+  }
+
+  .swiper-navBtn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .swiper-navBtn::after {
+    font-size: 15px;
+  }
+
+  .card {
+    min-height: 440px;
+  }
+
+  .image-content {
+    height: 210px;
+  }
+
+  .card-content {
+    padding: 16px;
+  }
+
+  .modal-dialog {
+    width: calc(100% - 20px);
+    max-height: 92vh;
+    border-radius: 22px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .header-actions .theme-label {
+    display: none;
+  }
+}
